@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/home"
+        android:title="@string/home"
+        android:icon="@drawable/dashboard_icon" />
+    <item android:id="@+id/wallet"
+        android:title="@string/wallet"
+        android:icon="@drawable/icon_wallet" />
+    <item android:id="@+id/menu"
+        android:title=" "
+        android:icon="@drawable/menu_ico" />
+    <item android:id="@+id/safe"
+        android:title="@string/cryptosave"
+        android:icon="@drawable/safe_icon" />
+    <item android:id="@+id/more"
+        android:title="@string/more"
+        android:icon="@drawable/more_icon" />
+</menu>

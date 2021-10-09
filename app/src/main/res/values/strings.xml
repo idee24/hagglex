@@ -26,4 +26,19 @@
     <string name="setup_complete">Setup Complete</string>
     <string name="thank_you_for_setting_up_your_hagglex_account">Thank you for setting up your HaggleX account</string>
     <string name="start_exploring">start exploring</string>
+    <string name="sv">SV</string>
+    <string name="notify_icon">notify_icon</string>
+    <string name="_5">5</string>
+    <string name="total_portfolio_balance">Total portfolio balance</string>
+    <string name="dollar_hidden">$****</string>
+    <string name="otcimageview">otcImageView</string>
+    <string name="markets">Markets</string>
+    <string name="home">Home</string>
+    <string name="wallet">Wallet</string>
+    <string name="more">more</string>
+    <string name="cryptosave">CryptoSave</string>
+    <string name="do_more_with_hagglex">Do more with HaggleX</string>
+    <string name="trending_crypto_news">Trending crypto news</string>
+    <string name="view_all_stories">View all stories</string>
+    <string name="send_money_instantly">Send money instantly</string>
 </resources>
