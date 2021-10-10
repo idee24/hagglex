@@ -1,0 +1,5 @@
+# Write your query or mutation hereal
+query ResendVerification($email: String! = "idee1140@gmail.com") {
+    resendVerificationCode(data: {  email: $email})
+
+}

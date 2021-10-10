@@ -1,0 +1,16 @@
+# Write your query or mutation hereal
+mutation LoginMutation($username: String!, $password: String!) {
+
+    login(data: {
+        input:$username,
+        password:$password
+    }){
+        user {
+            email
+            phonenumber
+            referralCode
+        }
+        token
+        twoFactorAuth
+    }
+}

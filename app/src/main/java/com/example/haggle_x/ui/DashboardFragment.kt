@@ -12,6 +12,7 @@ import com.example.haggle_x.R
 import com.example.haggle_x.databinding.FragmentDashboardBinding
 import com.example.haggle_x.ui.adapters.MarketsAdapter
 import com.example.haggle_x.ui.adapters.NewsAdapter
+import com.example.haggle_x.ui.adapters.TopAdapter
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
@@ -42,5 +43,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         layoutManager2.orientation = RecyclerView.VERTICAL
         binding.newsRecyclerView.layoutManager = layoutManager2
         binding.newsRecyclerView.adapter = NewsAdapter()
+
+        val topLayoutManager = LinearLayoutManager(activity)
+        topLayoutManager.orientation = RecyclerView.HORIZONTAL
+        binding.topRecyclerView.layoutManager = topLayoutManager
+        binding.topRecyclerView.adapter = TopAdapter()
     }
 }

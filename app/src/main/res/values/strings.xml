@@ -41,4 +41,8 @@
     <string name="trending_crypto_news">Trending crypto news</string>
     <string name="view_all_stories">View all stories</string>
     <string name="send_money_instantly">Send money instantly</string>
+    <string name="cancel">Cancel</string>
+    <string name="proceed">Proceed</string>
+    <string name="dismiss">DISMISS</string>
+    <string name="referral_code_optional">Referral code (optional)</string>
 </resources>
