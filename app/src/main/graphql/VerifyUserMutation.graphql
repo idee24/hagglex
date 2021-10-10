@@ -1,0 +1,23 @@
+# Write your query or mutation hereal
+mutation VerifyUser($code: Int!) {
+    verifyUser(data: {code: $code}) {
+        user{
+            _id
+            email
+            phonenumber
+            phoneNumberDetails{
+                callingCode
+                flag
+                phoneNumber
+            }
+            tradeCount
+            referralCode
+            referralCount
+            username
+            emailVerified
+            active
+            suspended
+        },
+        token
+    }
+}

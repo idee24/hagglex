@@ -1,5 +1,6 @@
 package com.example.haggle_x.ui
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -13,6 +14,7 @@ import android.widget.EditText
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.example.haggle_x.R
 import com.example.haggle_x.databinding.DialogBinding
 import com.google.android.material.textfield.TextInputLayout
@@ -21,7 +23,7 @@ import com.google.android.material.textfield.TextInputLayout
  *@Created by Yerimah on 10/10/2021.
  */
 
-fun isNotEmpty(activity: AppCompatActivity, inputField: EditText, inputLayout: TextInputLayout): Boolean {
+fun isNotEmpty(inputField: EditText, inputLayout: TextInputLayout): Boolean {
     val  target = inputField.text.toString().trim()
     return if (!TextUtils.isEmpty(target)) {
         inputLayout.isErrorEnabled = false
@@ -51,7 +53,7 @@ fun View.hideKeyboard() {
 }
 
 
-class CustomDialog(activity: AppCompatActivity,
+class CustomDialog(activity: FragmentActivity,
                    private val message: String,
                    private val callBack: () -> Unit): Dialog(activity) {
 

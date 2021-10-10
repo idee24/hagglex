@@ -44,8 +44,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun isValidLogin(): Boolean {
-        val username = isNotEmpty(mainActivity, binding.emailField, binding.emailLayout)
-        val password = isNotEmpty(mainActivity, binding.passwordField, binding.passwordLayout)
+        val username = isNotEmpty(binding.emailField, binding.emailLayout)
+        val password =
+            isNotEmpty(binding.passwordField, binding.passwordLayout)
         return username && password
     }
 

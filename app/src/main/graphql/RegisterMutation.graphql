@@ -1,0 +1,46 @@
+# Write your query or mutation hereal
+mutation RegisterMutation(
+    $email: String!,
+    $username: String!,
+    $password: String!,
+    $phonenumber: String!,
+    $referralCode: String,
+    $callingCode: String!,
+    $flag: String!,
+    $country: String!,
+    $currency: String!
+){
+    register(data: {
+        email: $email,
+        username: $username,
+        password: $password,
+        phonenumber: $phonenumber,
+        referralCode: $referralCode,
+        phoneNumberDetails: {
+            phoneNumber: $phonenumber,
+            callingCode: $callingCode,
+            flag: $flag
+        },
+        country: $country,
+        currency: $currency
+    }){
+        user{
+            _id
+            email
+            phonenumber
+            phoneNumberDetails{
+                callingCode
+                flag
+                phoneNumber
+            }
+            tradeCount
+            referralCode
+            referralCount
+            username
+            emailVerified
+            active
+            suspended
+        },
+        token
+    }
+}

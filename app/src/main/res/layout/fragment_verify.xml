@@ -89,7 +89,7 @@
                     android:fontFamily="@font/regular"
                     android:textSize="13sp"
                     android:hint="@string/verification_code"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:textColor="@android:color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

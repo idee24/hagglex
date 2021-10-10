@@ -1,6 +1,7 @@
 package com.example.haggle_x.ui
 
 import ResendVerificationQuery
+import VerifyUserMutation
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,7 +33,12 @@ class VerifyFragment : Fragment(R.layout.fragment_verify) {
         binding = FragmentVerifyBinding.bind(view)
 
         binding.verifyButton.setOnClickListener {
-            findNavController().navigate(R.id.action_verifyFragment_to_setupCompleteFragment)
+            if (binding.codeField.text.toString().trim().isNotEmpty()) {
+                verifyUserCode()
+            }
+            else {
+                CustomDialog(mainActivity, "Please enter a code to continue") {}.show()
+            }
         }
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
@@ -44,12 +50,41 @@ class VerifyFragment : Fragment(R.layout.fragment_verify) {
 
     }
 
+    private fun verifyUserCode() {
+
+        lifecycleScope.launchWhenStarted {
+
+            showLoader(true, binding.mainLoader.appLoader)
+
+            val response = try {
+                apolloClient(requireContext())
+                    .mutate(VerifyUserMutation(binding.codeField.toString().trim().toInt())).await()
+            }
+            catch (e: ApolloException) {
+                showLoader(false, binding.mainLoader.appLoader)
+                CustomDialog(mainActivity, e.message ?: "A problem Occurred") {}.show()
+                return@launchWhenStarted
+            }
+            showLoader(false, binding.mainLoader.appLoader)
+            if (response.hasErrors() || response.data?.verifyUser == null) {
+                CustomDialog(mainActivity, response.errors?.get(0)?.message ?: "A problem Occurred") {}.show()
+                return@launchWhenStarted
+            }
+            else {
+                findNavController().navigate(R.id.action_verifyFragment_to_setupCompleteFragment)
+                return@launchWhenStarted
+            }
+
+
+        }
+    }
+
     private fun initResendCode() {
 
         lifecycleScope.launchWhenStarted {
             showLoader(true, binding.mainLoader.appLoader)
 
-            val email = "verify@email.com"
+            val email = arguments?.getString("email_key") ?: ""
 
             val response = try {
                 apolloClient(requireContext()).query(ResendVerificationQuery(email)).await()
