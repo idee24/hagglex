@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haggle_x.MainActivity
@@ -13,6 +14,7 @@ import com.example.haggle_x.databinding.FragmentDashboardBinding
 import com.example.haggle_x.ui.adapters.MarketsAdapter
 import com.example.haggle_x.ui.adapters.NewsAdapter
 import com.example.haggle_x.ui.adapters.TopAdapter
+import com.pixplicity.easyprefs.library.Prefs
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
@@ -29,6 +31,15 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDashboardBinding.bind(view)
         initRecyclers()
+
+
+        Prefs.putBoolean("isLoggedIn", true)
+        binding.logoutTextView.setOnClickListener {
+            CustomDialog(mainActivity, "Are you Sure you want to logout") {
+                Prefs.clear()
+                findNavController().navigateUp()
+            }.show()
+        }
     }
 
 

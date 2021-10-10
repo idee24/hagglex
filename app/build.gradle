@@ -69,7 +69,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
 
     implementation 'com.github.angads25:toggle:1.1.0'
-
+    implementation 'com.pixplicity.easyprefs:EasyPrefs:1.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
     implementation("com.apollographql.apollo:apollo-runtime:2.5.9")
     implementation("com.apollographql.apollo:apollo-coroutines-support:2.5.9")
 

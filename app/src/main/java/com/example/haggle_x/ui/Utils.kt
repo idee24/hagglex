@@ -64,6 +64,10 @@ class CustomDialog(activity: FragmentActivity,
         setContentView(binding.root)
         binding.messageTextView.text = message
 
+        if (message == "Are you Sure you want to logout") {
+            binding.dismissTextView.text = "PROCEED"
+        }
+
         binding.dismissTextView.setOnClickListener {
             callBack()
             dismiss()

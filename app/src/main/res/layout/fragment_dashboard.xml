@@ -441,10 +441,23 @@
                 </RelativeLayout>
 
                 <View
-                    android:layout_marginBottom="100dp"
                     android:background="@color/ash"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"/>
+
+                <TextView
+                    android:id="@+id/logoutTextView"
+                    android:textSize="16sp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="24dp"
+                    android:padding="8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:layout_marginBottom="100dp"
+                    android:fontFamily="@font/bold"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:text="@string/logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 

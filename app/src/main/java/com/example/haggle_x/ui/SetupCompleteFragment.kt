@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.haggle_x.MainActivity
 import com.example.haggle_x.R
 import com.example.haggle_x.databinding.FragmentSetupCompleteBinding
+import com.pixplicity.easyprefs.library.Prefs
 
 
 class SetupCompleteFragment : Fragment(R.layout.fragment_setup_complete) {
@@ -24,6 +25,7 @@ class SetupCompleteFragment : Fragment(R.layout.fragment_setup_complete) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSetupCompleteBinding.bind(view)
 
+        Prefs.putBoolean("isLoggedIn", true)
         binding.startButton.setOnClickListener {
             findNavController().navigate(R.id.action_setupCompleteFragment_to_dashboardFragment)
         }

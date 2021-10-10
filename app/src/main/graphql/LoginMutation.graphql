@@ -4,13 +4,25 @@ mutation LoginMutation($username: String!, $password: String!) {
     login(data: {
         input:$username,
         password:$password
-    }){
-        user {
+    })
+    {
+        user{
+            _id
             email
             phonenumber
+            phoneNumberDetails{
+                callingCode
+                flag
+                phoneNumber
+            }
+            tradeCount
             referralCode
-        }
+            referralCount
+            username
+            emailVerified
+            active
+            suspended
+        },
         token
-        twoFactorAuth
     }
 }

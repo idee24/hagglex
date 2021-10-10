@@ -58,7 +58,7 @@ class VerifyFragment : Fragment(R.layout.fragment_verify) {
 
             val response = try {
                 apolloClient(requireContext())
-                    .mutate(VerifyUserMutation(binding.codeField.toString().trim().toInt())).await()
+                    .mutate(VerifyUserMutation(binding.codeField.text.toString().trim().toInt())).await()
             }
             catch (e: ApolloException) {
                 showLoader(false, binding.mainLoader.appLoader)

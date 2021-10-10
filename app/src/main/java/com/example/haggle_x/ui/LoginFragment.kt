@@ -1,11 +1,13 @@
 package com.example.haggle_x.ui
 
 import LoginMutation
+import ResendVerificationQuery
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.apollographql.apollo.ApolloClient
@@ -16,6 +18,7 @@ import com.example.haggle_x.MainActivity
 import com.example.haggle_x.R
 import com.example.haggle_x.apolloClient
 import com.example.haggle_x.databinding.FragmentLoginBinding
+import com.pixplicity.easyprefs.library.Prefs
 
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -56,8 +59,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
             showLoader(true, binding.mainLoader.appLoader)
 
-            val email = binding.emailField.toString().trim()
-            val password = binding.passwordField.toString().trim()
+            val email = binding.emailField.text.toString().trim()
+            val password = binding.passwordField.text.toString().trim()
 
             val response = try {
                 apolloClient(requireContext()).mutate(LoginMutation(email, password)).await()
@@ -73,7 +76,17 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 return@launchWhenStarted
             }
             else {
-                findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+                Prefs.putString("auth_key", response.data?.login?.token ?: "")
+                if (response.data?.login?.user?.emailVerified == true) {
+                    findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+                }
+                else {
+                    showLoader(true, binding.mainLoader.appLoader)
+                    apolloClient(requireContext()).query(ResendVerificationQuery(email)).await()
+                    showLoader(false, binding.mainLoader.appLoader)
+                    val bundle = bundleOf("email_key" to binding.emailField.text.toString().trim())
+                    findNavController().navigate(R.id.action_loginFragment_to_verifyFragment, bundle)
+                }
                 return@launchWhenStarted
             }
 

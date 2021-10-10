@@ -16,6 +16,7 @@ import com.example.haggle_x.MainActivity
 import com.example.haggle_x.R
 import com.example.haggle_x.apolloClient
 import com.example.haggle_x.databinding.FragmentSignUpBinding
+import com.pixplicity.easyprefs.library.Prefs
 import java.util.*
 
 
@@ -52,20 +53,19 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         lifecycleScope.launchWhenStarted {
 
             showLoader(true, binding.mainLoader.appLoader)
-
-            val email = binding.emailField.toString().trim()
-            val password = binding.passwordField.toString().trim()
-            val userName = binding.userNameField.toString().trim()
-            val phone = binding.phoneField.toString().trim()
-            val refCode = binding.referralField.toString().trim()
+            val email = binding.emailField.text.toString().trim()
+            val password = binding.passwordField.text.toString().trim()
+            val userName = binding.userNameField.text.toString().trim()
+            val phone = binding.phoneField.text.toString().trim()
+            val refCode = binding.referralField.text.toString().trim()
 
             val response = try {
                 apolloClient(requireContext()).mutate(RegisterMutation(email,
                     userName, password, phone,
                     Input.optional(refCode),
                     binding.ccPicker.selectedCountryCodeWithPlus,
-                    binding.ccPicker.defaultCountryName,
-                    binding.ccPicker.selectedCountryName,
+                    binding.ccPicker.selectedCountryNameCode,
+                    binding.ccPicker.selectedCountryName.uppercase(),
                     Currency.getInstance(Locale("",
                         binding.ccPicker.selectedCountryNameCode)).currencyCode
                 )).await()
@@ -82,6 +82,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             }
             else {
                 val bundle = bundleOf("email_key" to binding.emailField.text.toString().trim())
+                Prefs.putString("auth_key", response.data?.register?.token ?: "")
                 findNavController().navigate(R.id.action_signUpFragment_to_verifyFragment, bundle)
                 return@launchWhenStarted
             }
